@@ -11,7 +11,7 @@ export const defineSalaryWithYearsBonuses: defineSalaryWithYearsBonusesParamsTyp
   ) => {
     const bonus_for_one_year = base_salary * year_bonus_percent;
     const bonus_limit = base_salary * limit_percent;
-    const bonuses_for_all_years = +number_of_years_worked * bonus_for_one_year;
+    const bonuses_for_all_years = number_of_years_worked * bonus_for_one_year;
 
     if (bonuses_for_all_years <= bonus_limit) return base_salary + bonuses_for_all_years;
     else return base_salary + bonus_limit;
@@ -25,9 +25,9 @@ export const defineSubStaffBonuses: SubBonusesParamsTypes =
   ) => {
     let total_salary;
     for (let i = 0; i < sub_staff_array.length; i++) {
-      total_salary = salary_with_years_bonuses += sub_staff_array[i].salary * percent_from_sub_staff;
+      total_salary = Math.floor((salary_with_years_bonuses += sub_staff_array[i].salary * percent_from_sub_staff) * 10) / 10;
     }
-    return total_salary;
+    return total_salary
   };
 
 export const getBaseMembersData = (company_member: MainStaff) => {
@@ -38,7 +38,7 @@ export const getBaseMembersData = (company_member: MainStaff) => {
   const started_to_work_date = new Date(company_member.started_to_work).getTime();
   const current_date = new Date().getTime();
   const diff = current_date - started_to_work_date;
-  const number_of_years_worked = (diff / 31536000000).toFixed(0);
+  const number_of_years_worked = parseInt((diff / 31536000000).toFixed(0));
 
   return {
     name,

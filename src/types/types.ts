@@ -1,4 +1,5 @@
 import { SubStaff } from '../schemas/sub_staff.model';
+import { MainStaff } from '../schemas/main_staff.model';
 
 export interface SubBonusesParamsTypes {
   (
@@ -12,8 +13,15 @@ export interface defineSalaryWithYearsBonusesParamsTypes {
   (
     name: string,
     base_salary: number,
-    number_of_years_worked: string,
+    number_of_years_worked: number,
     year_bonus_percent: number,
     limit_percent: number,
   ): number
+}
+
+export interface Strategy {
+  company_member?: MainStaff;
+  company_members?: MainStaff[];
+
+  algorithm(): string;
 }

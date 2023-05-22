@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+// import { AppController } from './app.controller';
+// import { AppService } from './app.service';
 import exp from 'constants';
 
 
@@ -51,38 +51,38 @@ import exp from 'constants';
 //     });
 //   });
 // });
-describe('AppController', () => {
-  let controller: AppController;
-  let service: AppService;
-
-  class FakeClass {
-    // static getAllMembersSalaryData() {
-    //   jest.fn(async () => 'Value');
-    // }
-    static async getAllMembersSalaryData() {
-      return 'Value';
-    }
-
-
-    static getOneMemberSalaryDataByName() {
-      jest.fn(async (name: string) => Promise<void> );
-    }
-  }
-
-  beforeEach(async () => {
-    const moduleRef = await Test.createTestingModule({
-      controllers: [AppController],
-      providers: [AppService, { provide: AppService, useClass: FakeClass }],
-    }).compile();
-    controller = moduleRef.get<AppController>(AppController);
-    service = moduleRef.get<AppService>(AppService);
-  });
-  describe('Services and controller', () => {
-    it('should be define controller and service', async () => {
-      expect(controller).toBeDefined();
-      expect(service).toBeDefined();
-      const spy = jest.spyOn(FakeClass, 'getAllMembersSalaryData').mockReturnValue('')
-      expect(FakeClass.getAllMembersSalaryData).toBeDefined();
-    });
-  });
-});
+// describe('AppController', () => {
+//   let controller: AppController;
+//   let service: AppService;
+//
+//   class FakeClass {
+//     // static getAllMembersSalaryData() {
+//     //   jest.fn(async () => 'Value');
+//     // }
+//     static async getAllMembersSalaryData() {
+//       return 'Value';
+//     }
+//
+//
+//     static getOneMemberSalaryDataByName() {
+//       jest.fn(async (name: string) => Promise<void> );
+//     }
+//   }
+//
+//   beforeEach(async () => {
+//     const moduleRef = await Test.createTestingModule({
+//       controllers: [AppController],
+//       providers: [AppService, { provide: AppService, useClass: FakeClass }],
+//     }).compile();
+//     controller = moduleRef.get<AppController>(AppController);
+//     service = moduleRef.get<AppService>(AppService);
+//   });
+//   describe('Services and controller', () => {
+//     it('should be define controller and service', async () => {
+//       expect(controller).toBeDefined();
+//       expect(service).toBeDefined();
+//       const spy = jest.spyOn(FakeClass, 'getAllMembersSalaryData').mockReturnValue('')
+//       expect(FakeClass.getAllMembersSalaryData).toBeDefined();
+//     });
+//   });
+// });

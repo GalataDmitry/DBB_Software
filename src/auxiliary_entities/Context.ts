@@ -1,11 +1,6 @@
 import { MainStaff } from '../schemas/main_staff.model';
 import { defineSalaryWithYearsBonuses, defineSubStaffBonuses, getBaseMembersData } from './auxiliary_functions';
-
-interface Strategy {
-  company_member?: MainStaff;
-  company_members?: MainStaff[];
-  algorithm(): string;
-}
+import { Strategy } from '../types/types';
 
 export class GetOneMemberSalaryDataByName implements Strategy {
 
@@ -59,7 +54,6 @@ export class GetAllMembersSalaryData implements Strategy {
   algorithm(): string {
 
     let all_main_staff_total_salary = 0;
-
     for (let i = 0; i < this.company_members.length; i++) {
 
       const {
@@ -85,27 +79,26 @@ export class GetAllMembersSalaryData implements Strategy {
         let salary_with_years_bonuses = defineSalaryWithYearsBonuses(name, base_salary, number_of_years_worked, 0.01, 0.35);
         const total_salary = defineSubStaffBonuses(this.company_members[i].sub_staff, salary_with_years_bonuses, 0.003);
         all_main_staff_total_salary += total_salary;
-
       }
     }
-    return `All main staff salary: ${all_main_staff_total_salary.toFixed(1)}$`;
+    const result = Math.floor(all_main_staff_total_salary * 10) / 10;
+    return `All main staff salary: ${result}$`;
   }
 }
 
-export class AuxContext {
+export class Context {
 
   private strategy: Strategy;
 
-  constructor(strategy: Strategy) {
+  constructor(strategy?: Strategy) {
     this.strategy = strategy;
   }
 
-  public setStrategy(strategy: Strategy) {
+  setStrategy(strategy: Strategy) {
     this.strategy = strategy;
   }
 
-  public toCompute(): string {
+  toCompute(): string {
     return this.strategy.algorithm();
   }
-
 }

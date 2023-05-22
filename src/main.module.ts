@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { MainStaff } from './schemas/main_staff.model';
 import { SubStaff } from './schemas/sub_staff.model';
 import { MainStaffSubStaff } from './schemas/main_staff_sub_staff.model';
-import { ConfigModule } from '@nestjs/config';
+import { CompanyModule } from './company/company.module';
 
 @Module({
   imports: [
@@ -22,10 +21,8 @@ import { ConfigModule } from '@nestjs/config';
       },
       models: [MainStaff, SubStaff, MainStaffSubStaff],
     }),
-    SequelizeModule.forFeature([MainStaff, SubStaff, MainStaffSubStaff]),
+    CompanyModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
-export class AppModule {
-}
+
+export class MainModule {}
