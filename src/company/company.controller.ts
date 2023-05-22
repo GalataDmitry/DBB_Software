@@ -9,7 +9,6 @@ export class CompanyController {
 
   @Get('/get_salary_data/:name')
   async getSalaryData(@Param('name') name: string) {
-    console.log('what we returned --------------->>>>', await this.companyService.getSalaryData(name));
     return await this.companyService.getSalaryData(name);
   }
 }
